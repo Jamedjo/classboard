@@ -22,6 +22,7 @@
 <template name="main">
   <h1>Class Board</h1>
   {{#unless currentUser}}{{> sign_in_box}}{{/unless}}
+  {{> help_form}}
   {{> requests}}
 </template>
 
@@ -30,12 +31,6 @@
 </template>
 
 <template name="requests">
-  {{#if currentUser}}
-    <form>
-      <input type="text" id="requestText" placeholder="What's the problem?...">
-      <input type="submit" class="add-request" value='Ask for help'>
-    </form>
-  {{/if}}
     <h2>Waiting list</h2>
     {{#each items}}
         {{> request}}
@@ -54,4 +49,11 @@
         </p>
         <button class="delete" data-id="{{_id}}">Solved</button>
     </div>
+</template>
+
+<template name="help_form">
+  <form>
+    <input type="text" id="requestText" placeholder="What's the problem?..."{{#unless currentUser}}disabled{{/unless}}>
+    <input type="submit" class="add-request" value='Ask for help'{{#unless currentUser}}disabled{{/unless}}>
+  </form>
 </template>
