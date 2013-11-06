@@ -6,6 +6,10 @@ userName = function(){
   }
 }
 
+handleError = function(error, response){
+  if(error) console.log(error);
+}
+
 if (Meteor.isClient) {
   Template.requests.items = function(){
       return Requests.find({},{sort:{'submittedOn':-1}});
@@ -18,23 +22,18 @@ if (Meteor.isClient) {
 
   Template.requests.events({
   'click input.add-request' : function(event){
-    event.preventDefault();
     var requestText = document.getElementById("requestText").value;
-    Meteor.call("addRequest",requestText,function(error , requestId){
-      console.log('added request with Id .. '+requestId);
-    });
+    Meteor.call("addRequest",requestText,handleError);
     document.getElementById("requestText").value = "";
     }
   });
 
   Template.request.events({
     'click button.delete' : function(event){
-      event.preventDefault();
       var Id = event.target.getAttribute('data-id')
-      Meteor.call("removeRequest",Id);
+      Meteor.call("removeRequest",Id, handleError);
     }
   });
-  // };
 
 }
 
