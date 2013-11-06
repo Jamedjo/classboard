@@ -30,10 +30,12 @@
 </template>
 
 <template name="requests">
-   {{#if currentUser}}
-    <input type="text" id="requestText" placeholder="What's the problem?...">
-    <input type="submit" class="add-request" value='Ask for help'>
-    {{/if}}
+  {{#if currentUser}}
+    <form>
+      <input type="text" id="requestText" placeholder="What's the problem?...">
+      <input type="submit" class="add-request" value='Ask for help'>
+    </form>
+  {{/if}}
     <h2>Waiting list</h2>
     {{#each items}}
         {{> request}}
