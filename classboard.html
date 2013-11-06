@@ -1,5 +1,6 @@
 <head>
   <title>Class Board</title>
+  <script src="moment.min.js" type="text/javascript"/>
 </head>
 
 <body>
@@ -29,10 +30,25 @@
 </template>
 
 <template name="requests">
-  <h3>Students</h3>
-  {{#each requests}}
+   {{#if currentUser}}
+    <input type="text" id="requestText">
+    <input type="submit" class="add-request"></input>
+    {{/if}}
+    <h2>Students</h2>
+    {{#each items}}
+        {{> request}}
+     {{/each}}
+</template>
+ 
+<template name="request">
     <div>
-      Request
+        <p class="lead">
+            {{date submittedOn}}
+            {{requestText}}
+            Name:{{username}}
+<!--             <a class="btn btn-small btn-success yes {{#unless currentUser}}disabled{{/unless}}" href="#"><i class="icon-thumbs-up"></i> Yes {{yes}}</a>
+ 
+            <a class="btn btn-small btn-danger no {{#unless currentUser}}disabled{{/unless}}" href="#"><i class="icon-thumbs-down"></i> No {{no}}</a> -->
+        </p>
     </div>
-  {{/each}}
 </template>

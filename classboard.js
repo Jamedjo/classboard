@@ -1,8 +1,22 @@
-if (Meteor.isClient) {
-  // Template.hello.greeting = function () {
-  //   return "Welcome to classboard.";
+Requests = new Meteor.Collection("requests");
 
-  Template.addRequest.events({
+userName = function(){
+  if(Meteor.user()){
+    return Meteor.user().profile.name || Meteor.user().services.github.username;
+  }
+}
+
+if (Meteor.isClient) {
+  Template.requests.items = function(){
+      return Requests.find({},{sort:{'submittedOn':-1}});
+  };
+
+  // Template.request.userName = userName;
+  Template.request.date = function(date){
+    return moment(date).fromNow();
+  };
+
+  Template.requests.events({
   'click input.add-request' : function(event){
     event.preventDefault();
     var requestText = document.getElementById("requestText").value;
@@ -15,18 +29,10 @@ if (Meteor.isClient) {
   });
   // };
 
-  Template.hello.events({
-    'click input' : function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
-    }
-  });
 }
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    Requests = new Meteor.Collection("requests");
 
     Meteor.methods({
       addRequest : function(requestText){
@@ -34,6 +40,7 @@ if (Meteor.isServer) {
         var requestId = Requests.insert({
               'requestText' : requestText,
               'submittedOn': new Date(),
+              'username' : userName(),
               'submittedBy' : Meteor.userId()
           });
         return requestId;
@@ -42,3 +49,5 @@ if (Meteor.isServer) {
         // code to run on server at startup
   });
 }
+
+
