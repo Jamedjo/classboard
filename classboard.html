@@ -1,15 +1,38 @@
 <head>
-  <title>classboard</title>
+  <title>Class Board</title>
 </head>
 
 <body>
-	{{loginButtons}}
-	<!-- {> Equivalent to 'render' in Rails -->
-  {{> hello}} 
+  <div class="navbar navbar-static-top navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="/">Class Board</a>
+        <ul class="nav pull-right">
+          <li>
+            {{loginButtons}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">{{> main}}</div>
 </body>
 
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" class="btn"/>
+<template name="main">
+  <h1>Class Board</h1>
+  {{#unless currentUser}}{{> sign_in_box}}{{/unless}}
+  {{> requests}}
+</template>
+
+<template name="sign_in_box">
+  <div class="well"><h4>Sign in with github to use Class Board</h4>{{loginButtons}}</div>
+</template>
+
+<template name="requests">
+  <h3>Students</h3>
+  {{#each requests}}
+    <div>
+      Request
+    </div>
+  {{/each}}
 </template>
