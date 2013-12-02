@@ -27,6 +27,18 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
     Requests = new Meteor.Collection("requests");
-    // code to run on server at startup
+
+    Meteor.methods({
+      addRequest : function(requestText){
+        console.log('Adding Request');
+        var requestId = Requests.insert({
+              'requestText' : requestText,
+              'submittedOn': new Date(),
+              'submittedBy' : Meteor.userId()
+          });
+        return requestId;
+      }
+    });
+        // code to run on server at startup
   });
 }
