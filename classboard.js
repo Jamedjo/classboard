@@ -24,7 +24,6 @@ if (Meteor.isClient) {
       console.log('added request with Id .. '+requestId);
     });
     document.getElementById("requestText").value = "";
-
     }
   });
 
@@ -41,7 +40,7 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-
+    // Users = new Meteor.Collection('users');
     Meteor.methods({
       addRequest : function(requestText){
         console.log('Adding Request');
@@ -57,7 +56,14 @@ if (Meteor.isServer) {
         return Requests.remove({
           '_id': requestId
         });
-      }
+      },
+      setAdmin: function(userId){
+        console.log('asdf');
+        console.log(userId);
+        return Meteor.users.update({_id: userId},{$set:{
+          'admin': true
+        }});
+      }  
     });
         // code to run on server at startup
   });
