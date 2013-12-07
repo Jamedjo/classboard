@@ -27,6 +27,14 @@ if (Meteor.isClient) {
 
     }
   });
+
+  Template.request.events({
+    'click button.delete' : function(event){
+      event.preventDefault();
+      var Id = event.target.getAttribute('data-id')
+      Meteor.call("removeRequest",Id);
+    }
+  });
   // };
 
 }
@@ -44,6 +52,11 @@ if (Meteor.isServer) {
               'submittedBy' : Meteor.userId()
           });
         return requestId;
+      },
+      removeRequest: function(requestId){
+        return Requests.remove({
+          '_id': requestId
+        });
       }
     });
         // code to run on server at startup

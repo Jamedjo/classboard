@@ -31,10 +31,10 @@
 
 <template name="requests">
    {{#if currentUser}}
-    <input type="text" id="requestText">
-    <input type="submit" class="add-request"></input>
+    <input type="text" id="requestText" placeholder="What's the problem?...">
+    <input type="submit" class="add-request" value='Ask for help'>
     {{/if}}
-    <h2>Students</h2>
+    <h2>Waiting list</h2>
     {{#each items}}
         {{> request}}
      {{/each}}
@@ -50,5 +50,6 @@
  
             <a class="btn btn-small btn-danger no {{#unless currentUser}}disabled{{/unless}}" href="#"><i class="icon-thumbs-down"></i> No {{no}}</a> -->
         </p>
+        <button class="delete" data-id="{{_id}}">Solved</button>
     </div>
 </template>
