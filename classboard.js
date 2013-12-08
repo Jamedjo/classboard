@@ -70,6 +70,10 @@ if (Meteor.isServer) {
         }});
       }  
     });
+
+    Meteor.publish(null, function () {
+      return Meteor.users.find({_id: this.userId},{fields: {'admin': 1}});
+    }); 
         // code to run on server at startup
   });
 }
