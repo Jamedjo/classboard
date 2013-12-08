@@ -20,7 +20,7 @@ if (Meteor.isClient) {
     return moment(date).fromNow();
   };
 
-  Template.requests.events({
+  Template.helpForm.events({
   'click input.add-request' : function(event){
     var requestText = document.getElementById("requestText").value;
     Meteor.call("addRequest",requestText,handleError);
@@ -35,6 +35,11 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.request.owner = function(userId){
+    if (Meteor.user()) {
+      return userId == Meteor.user()._id || Meteor.user().admin == true;
+    };
+  };
 }
 
 if (Meteor.isServer) {
