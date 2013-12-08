@@ -12,7 +12,7 @@ handleError = function(error, response){
 
 if (Meteor.isClient) {
   Template.requests.items = function(){
-      return Requests.find({},{sort:{'submittedOn':-1}});
+      return Requests.find({solved:null},{sort:{'submittedOn':-1}});
   };
 
   // Template.request.userName = userName;
@@ -32,7 +32,7 @@ if (Meteor.isClient) {
   Template.request.events({
     'click button.delete' : function(event){
       var Id = event.target.getAttribute('data-id')
-      Meteor.call("removeRequest",Id, handleError);
+      Meteor.call("solveRequest",Id, handleError);
     }
   });
 
@@ -57,14 +57,12 @@ if (Meteor.isServer) {
           });
         return requestId;
       },
-      removeRequest: function(requestId){
-        return Requests.remove({
-          '_id': requestId
-        });
+      solveRequest: function(requestId){
+        return Requests.update({_id: requestId},{$set:{
+          'solved': true
+        }});
       },
       setAdmin: function(userId){
-        console.log('asdf');
-        console.log(userId);
         return Meteor.users.update({_id: userId},{$set:{
           'admin': true
         }});
