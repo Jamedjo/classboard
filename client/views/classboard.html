@@ -1,3 +1,4 @@
+
 <head>
   <title>Class Board</title>
   <script src="moment.min.js" type="text/javascript"/>
@@ -16,10 +17,13 @@
       </div>
     </div>
   </div>
-  <div class="container">{{> main}}</div>
+  <div class="container">{{renderPage}}</div>
 </body>
 
-<template name="main">
+<template name="404">
+  404- Not Found
+</template>
+<template name="home">
   <h1>Class Board</h1>
   {{#unless currentUser}}{{> sign_in_box}}{{/unless}}
   {{> helpForm}}

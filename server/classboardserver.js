@@ -1,9 +1,10 @@
 Meteor.startup(function () {
   // Users = new Meteor.Collection('users');
   Meteor.methods({
-    addRequest : function(requestText, description){
+    addRequest : function(classId, requestText, description){
       console.log('Adding Request');
       var requestId = Requests.insert({
+            'classId': classId,
             'requestText' : requestText,
             'description' : description,
             'submittedOn': new Date(),

@@ -17,7 +17,8 @@ Template.helpForm.events({
   event.preventDefault();
   var requestText = document.getElementById("requestText").value;
   var description = document.getElementById("description").value;
-  Meteor.call("addRequest",requestText,description, handleError);
+  var classId = document.getElementById("classId").value;
+  Meteor.call("addRequest",classId,requestText,description, handleError);
   document.getElementById("requestText").value = "";
   }
 });
