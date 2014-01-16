@@ -46,6 +46,7 @@
         <p class="lead">
             {{date submittedOn}}
             {{requestText}}
+            {{description}}
             Name:{{username}}
 <!--             <a class="btn btn-small btn-success yes {{#unless currentUser}}disabled{{/unless}}" href="#"><i class="icon-thumbs-up"></i> Yes {{yes}}</a>
  
@@ -62,6 +63,7 @@
         <p class="lead">
             {{date submittedOn}}
             {{requestText}}
+            {{description}}
             Name:{{username}}
         </p>
     </div>
@@ -70,6 +72,7 @@
 <template name="helpForm">
   <form>
     <input type="text" id="requestText" placeholder="What's the problem?..."{{#unless currentUser}}disabled{{/unless}}>
+    <input type="text" id="description" placeholder="Enter problem description"{{#unless currentUser}}disabled{{/unless}}>
     <input type="submit" class="add-request" value='Ask for help'{{#unless currentUser}}disabled{{/unless}}>
   </form>
 </template>
