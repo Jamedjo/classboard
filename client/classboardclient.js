@@ -1,10 +1,10 @@
 Template.requests.items = function(){
-  var classId = window.classId;
+  var classId = currentClassId();
     return Requests.find({classId: classId, solved:null},{sort:{'submittedOn':-1}});
 };
 
 Template.requests.solved_items = function(){
-  var classId = window.classId;
+  var classId = currentClassId();
     return Requests.find({classId: classId, solved:true},{sort:{'submittedOn':-1}});
 };
 
@@ -23,7 +23,7 @@ Template.helpForm.events({
   event.preventDefault();
   var requestText = document.getElementById("requestText").value;
   var description = document.getElementById("description").value;
-  var classId = window.classId;
+  var classId = currentClassId();
   Meteor.call("addRequest",classId,requestText,description, handleError);
   document.getElementById("requestText").value = "";
   }
