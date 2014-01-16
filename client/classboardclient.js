@@ -2,6 +2,11 @@ Template.requests.items = function(){
     return Requests.find({solved:null},{sort:{'submittedOn':-1}});
 };
 
+Template.requests.solved_items = function(){
+    return Requests.find({solved:true},{sort:{'submittedOn':-1}});
+};
+
+
 // Template.request.userName = userName;
 Template.request.date = function(date){
   return moment(date).fromNow();

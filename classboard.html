@@ -35,6 +35,10 @@
     {{#each items}}
         {{> request}}
      {{/each}}
+    <h2>Solved</h2>
+    {{#each solved_items}}
+        {{> solved_request}}
+     {{/each}}
 </template>
  
 <template name="request">
@@ -50,6 +54,16 @@
         {{#if owner submittedBy}}
         <button class="delete" data-id="{{_id}}">Solved</button>
         {{/if}}
+    </div>
+</template>
+
+<template name="solved_request">
+    <div>
+        <p class="lead">
+            {{date submittedOn}}
+            {{requestText}}
+            Name:{{username}}
+        </p>
     </div>
 </template>
 
