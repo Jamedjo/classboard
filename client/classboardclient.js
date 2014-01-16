@@ -23,9 +23,10 @@ Template.helpForm.events({
 });
 
 Template.request.events({
-  'click button.delete' : function(event){
-    var Id = event.target.getAttribute('data-id')
-    Meteor.call("solveRequest",Id, handleError);
+  'click button.solve' : function(event){
+    var Id = event.target.getAttribute('data-id');
+    var solutionText = document.getElementById("solutionText").value;
+    Meteor.call("solveRequest",Id, solutionText, handleError);
   }
 });
 

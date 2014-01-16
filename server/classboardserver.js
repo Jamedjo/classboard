@@ -12,9 +12,10 @@ Meteor.startup(function () {
         });
       return requestId;
     },
-    solveRequest: function(requestId){
+    solveRequest: function(requestId, solutionText){
       return Requests.update({_id: requestId},{$set:{
-        'solved': true
+        'solved': true,
+        'solutionText': solutionText
       }});
     },
     setAdmin: function(userId){

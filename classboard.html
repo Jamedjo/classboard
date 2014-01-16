@@ -37,7 +37,7 @@
      {{/each}}
     <h2>Solved</h2>
     {{#each solved_items}}
-        {{> solved_request}}
+        {{> request}}
      {{/each}}
 </template>
  
@@ -47,27 +47,18 @@
             {{date submittedOn}}
             {{requestText}}
             {{description}}
+            {{solutionText}}
             Name:{{username}}
-<!--             <a class="btn btn-small btn-success yes {{#unless currentUser}}disabled{{/unless}}" href="#"><i class="icon-thumbs-up"></i> Yes {{yes}}</a>
- 
-            <a class="btn btn-small btn-danger no {{#unless currentUser}}disabled{{/unless}}" href="#"><i class="icon-thumbs-down"></i> No {{no}}</a> -->
         </p>
-        {{#if owner submittedBy}}
-        <button class="delete" data-id="{{_id}}">Solved</button>
-        {{/if}}
+        {{#unless solved}}
+          {{#if owner submittedBy}}
+            <input type="text" id="solutionText" placeholder="Enter problem solution">
+            <button class="solve" data-id="{{_id}}">Solved</button>
+          {{/if}}
+        {{/unless}}
     </div>
 </template>
 
-<template name="solved_request">
-    <div>
-        <p class="lead">
-            {{date submittedOn}}
-            {{requestText}}
-            {{description}}
-            Name:{{username}}
-        </p>
-    </div>
-</template>
 
 <template name="helpForm">
   <form>
