@@ -23,7 +23,7 @@ Meteor.startup(function () {
       return Meteor.users.update({_id: userId},{$set:{
         'admin': true
       }});
-    }  
+    }
   });
 
   Meteor.publish(null, function () {
